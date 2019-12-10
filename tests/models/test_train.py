@@ -6,6 +6,21 @@ from models.train import split_into_training_and_testing_sets, train_model, mode
 
 
 class TestSplitIntoTrainingAndTestingSets(object):
+   
+
+    def test_on_one_row(self):
+        test_argument = np.array([[1382.0, 390167.0]])
+        with pytest.raises(ValueError) as exc_info:
+            split_into_training_and_testing_sets(test_argument)
+        expected_error_msg = "Argument data_array must have at least 2 rows, it actually has just 1"
+        assert exc_info.match(expected_error_msg)
+
+    def test_on_one_dimensional_array(self):
+        test_argument = np.array([1382.0, 390167.0])
+        with pytest.raises(ValueError) as exc_info:
+            split_into_training_and_testing_sets(test_argument)
+        expected_error_msg = "Argument data_array must be two dimensional. Got 1 dimensional array instead!"
+        assert exc_info.match(expected_error_msg)
     def test_on_six_rows(self):
         test_argument = np.array([[2081.0, 314942.0],
                                [1059.0, 186606.0],
@@ -22,21 +37,6 @@ class TestSplitIntoTrainingAndTestingSets(object):
                "The actual number of rows in the training array is not 4"
         assert actual[1].shape[0] == expected_length_testing_set, \
                "The actual number of rows in the testing array is not 2"
-
-    def test_on_one_row(self):
-        test_argument = np.array([[1382.0, 390167.0]])
-        with pytest.raises(ValueError) as exc_info:
-            split_into_training_and_testing_sets(test_argument)
-        expected_error_msg = "Argument data_array must have at least 2 rows, it actually has just 1"
-        assert exc_info.match(expected_error_msg)
-
-    def test_on_one_dimensional_array(self):
-        test_argument = np.array([1382.0, 390167.0])
-        with pytest.raises(ValueError) as exc_info:
-            split_into_training_and_testing_sets(test_argument)
-        expected_error_msg = "Argument data_array must be two dimensional. Got 1 dimensional array instead!"
-        assert exc_info.match(expected_error_msg)
-
 
 class TestTrainModel(object):
     def test_on_linear_data(self):
