@@ -4,6 +4,8 @@ import pytest
 from models.train import split_into_training_and_testing_sets
 
 
+
+@pytest.mark.xfail
 def test_on_six_rows():
     test_argument = np.array([[2081.0, 314942.0],
                                [1059.0, 186606.0],
@@ -17,6 +19,6 @@ def test_on_six_rows():
     expected_training_array_num_rows = 4
     # Fill in with testing array's expected number of rows
     expected_testing_array_num_rows = 2
-    actual = split_into_training_and_testing_sets(test_argument)
+    actual = None
     # Write the assert statement checking training array's number of rows
     assert False
