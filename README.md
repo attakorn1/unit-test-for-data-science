@@ -1,5 +1,5 @@
-# unit-test-for-data-science
-This repo for Teaching how to write unit tests for My Data Science Team projects in Python using pytest.
+# Unit-test for Data Science
+This is an code for teach my data science team  how to write unit tests for data science projects in Python using pytest.
 
 ## Setup
 To run this project, install it locally using virtual env:
